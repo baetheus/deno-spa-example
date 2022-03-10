@@ -1,11 +1,13 @@
 CFLAGS = --config browser.json
 TARGETS = public/bundle.js
 
-public/bundle.js: $(shell find src -type f)
-	deno bundle src/main.ts $(CFLAGS) > $@
+build: $(shell find src -type f)
+	deno bundle src/main.ts $(CFLAGS) > public/bundle.js
 
 clean:
-	rm $(TARGETS)
+	rm -f $(TARGETS)
 
-serve: clean public/bundle.js
+serve:
 	(cd public; deno run --allow-net --allow-read https://deno.land/std/http/file_server.ts)
+
+dev: clean build serve
