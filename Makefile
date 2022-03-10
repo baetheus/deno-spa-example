@@ -1,8 +1,8 @@
-CFLAGS = --config browser.json
+CFLAGS = --config tsconfig.json
 TARGETS = public/bundle.js
 
 build: $(shell find src -type f)
-	deno bundle src/main.tsx $(CFLAGS) > public/bundle.js
+	deno bundle src/main.ts $(CFLAGS) > public/bundle.js
 
 clean:
 	rm -f $(TARGETS)
