@@ -1,5 +1,6 @@
-// Pull in lit-html for rendering to the dom
-import { html, render } from "https://esm.sh/lit-html@2.2.0";
+// Pull in React and ReactDOM for rendering to the dom
+import React from "https://esm.sh/react@17.0.2";
+import { render }  from "https://esm.sh/react-dom@17.0.2";
 
 // Pull in some AsyncIterable tools from functional
 import {
@@ -15,7 +16,7 @@ import {
 } from "https://raw.githubusercontent.com/nullpub/fun/main/fns.ts";
 
 // This is a lit-html template function. It returns a lit-html template.
-const helloTemplate = (text: string) => html`<h1>${text}!</h1>`;
+const helloTemplate = (text: string) => (<h1>{text}!</h1>);
 
 // This renders <h1>Hello World</h1> to the document body
 render(helloTemplate("Hello World"), document.body);

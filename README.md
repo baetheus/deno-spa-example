@@ -2,7 +2,7 @@
 
 Deno has a builtin bundle command as well as typescript libs for dom and esnext.
 This repo shows a simple example of a deno-only build chain for a simple SPA.
-Additionally, it uses the lit-html import from esm.sh, some simple AsyncIterator
+Additionally, it uses the React import from esm.sh, some simple AsyncIterator
 tools from the functional library, and bmake.
 
 ## Building, cleaning, and serving
@@ -56,11 +56,11 @@ configuration file.
 }
 ```
 
-In order for the types in lit-html to typecheck correctly we need to inform Deno
+In order for the types in React to typecheck correctly we need to inform Deno
 that we are only using the `dom` and `esnext` types. By default, `dom` types
 conflict with the default `deno.window` types that Deno automatically loads.
 The `dom` lib gives us access to the `document` as well as various browser types
-like `Node` and `Element` that are used in lit-html. The `esnext` lib gives us
+like `Node` and `Element` that are used in React The `esnext` lib gives us
 access to language builtins like `AsyncIterable` and `Object.hasOwn`. Without
 these the deno bundle process will fail on type checking.
 
