@@ -376,6 +376,18 @@ function forEach(onValue, onDone = ()=>{}) {
         onDone();
     };
 }
+function take(n) {
+    return (ta)=>make(async function*() {
+            let count = Math.floor(n);
+            for await (const a of ta){
+                if (count-- <= 0) {
+                    return;
+                }
+                yield a;
+            }
+        })
+    ;
+}
 const Apply = {
     ap,
     map
@@ -390,9 +402,9 @@ const Monad = {
 const { Do , bind , bindTo  } = createDo(Monad);
 createSequenceTuple(Apply);
 createSequenceStruct(Apply);
-const helloTemplate = (name)=>Q`<div>Hello ${name}!</div>`
+const helloTemplate = (text)=>Q`<h1>${text}!</h1>`
 ;
-Y(helloTemplate("Steve"), document.body);
+Y(helloTemplate("Hello World"), document.body);
 const counter = (ms)=>make(async function*() {
         let count = 0;
         while(true){
@@ -401,7 +413,7 @@ const counter = (ms)=>make(async function*() {
         }
     })
 ;
-await pipe(counter(100), forEach((value)=>{
+await pipe(counter(1000), take(10), forEach((value)=>{
     Y(helloTemplate(`Count ${value}`), document.body);
 }, ()=>{
     Y(helloTemplate(`Done!`), document.body);
